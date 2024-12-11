@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import store from './store/index';
 
 const app = createApp(App);
 import { useLoading } from 'vue-loading-overlay'
@@ -37,6 +38,7 @@ app.use(router)
 .use(ZiggyVue, Ziggy)
 .use(VueSweetalert2)
 .use(Notifications)
+.use(store)
 .use(LoadingPlugin);
 
 

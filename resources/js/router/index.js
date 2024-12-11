@@ -9,7 +9,7 @@ import Register from '../Pages/Auth/Register.vue';
 const routes = [
     {
         path: '/',
-        name: 'Home',
+        name: 'home',
         component: Home
     },
     {

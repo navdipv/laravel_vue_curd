@@ -1,30 +1,42 @@
-// src/store/index.js
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+import http from '@/utils/http';
 
 export default createStore({
-  state() {
-    return {
-      token: localStorage.getItem('token') || null,
-    };
+  state: {
+    user: null,
+    token: localStorage.getItem('token') || null,
   },
   mutations: {
-    setToken(state, token) {
+    SET_USER(state, user) {
+      state.user = user;
+    },
+    SET_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
+    },
+    CLEAR_AUTH(state) {
+      state.user = null;
+      state.token = null;
+      localStorage.removeItem('token');
     }
   },
   actions: {
     login({ commit }, credentials) {
-      return axios.post('http://laravel_vue_app.localhost/api/login', credentials)
+      return http.post('/login', credentials)
         .then(({ data }) => {
-          commit('setToken', data.token);
+          commit('SET_TOKEN', data.data.token);
+          commit('SET_USER', data.data.user);
+        })
+        .catch(error => {
+          console.error('Error on login', error);
         });
     },
-    register({ commit }, credentials) {
-      return axios.post('http://laravel_vue_app.localhost/api/register', credentials)
-        .then(({ data }) => {
-          commit('setToken', data.token);
-        });
+    logout({ commit }) {
+      commit('CLEAR_AUTH');
     }
+  },
+  getters: {
+    isLoggedIn: state => !!state.token,
+    currentUser: state => state.user,
   }
 });

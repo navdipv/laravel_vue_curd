@@ -1,11 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import Toast from '@/Components/Miscs/Toast.vue';
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { useGeneral } from '../../Compasable/General';
 const { asset } = useGeneral();
-import axios from 'axios';
+import http from '@/utils/http';
 
 // Using ref to hold form data
 const form = ref({
@@ -25,18 +24,19 @@ const route = useRoute();
 const submit = async () => {
     try {
         // Send POST request to the server
-        const response = await axios.post('http://laravel_vue_app.localhost/api/register', form.value);
+        const response = await http.post('register', form.value);
         console.log('Registration successful:', response.data);
-        // Handle response, e.g., storing the token, navigating to another route
-        store.commit('setToken', response.data.token); // Assuming Vuex store usage
-        router.push('/home'); // Redirect after successful registration
+
+        router.push({ name: 'login' });
+
+         // Redirect after successful registration
     } catch (e) {
         if (e.response && e.response.data && e.response.data.errors) {
             // Capture validation or other errors from the server
             errors.value = e.response.data.errors;
         } else {
             // Handle other types of errors (network issues, etc.)
-            console.error('An error occurred:', e);
+            console.error('An error occurred:', e.response.data.message);
         }
     }
 };
@@ -78,7 +78,7 @@ defineExpose({
 
                 <div class="mb-3">
                     <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
-                    <input class="form-control" type="email" placeholder="john@example.com" autofocus="" tabindex="1"
+                    <input class="form-control" type="text" placeholder="john@example.com" autofocus="" tabindex="1"
                         v-model="form.email" maxlength="100">
                     <div class="text-danger" v-if="errors.email">{{ errors.email }}</div>
                 </div>
@@ -90,8 +90,8 @@ defineExpose({
                     <div class="input-group input-group-merge">
                         <input class="form-control form-control-merge" type="password" placeholder="············"
                             id="password" tabindex="2" v-model="form.password">
-                        <span class="input-group-text cursor-pointer" @click="reveal('password')"><font-awesome-icon
-                                :icon="['fad', 'eye']" /></span>
+                        <span class="input-group-text cursor-pointer" @click="reveal('password')">
+                            <font-awesome-icon :icon="['fad', 'eye']" /></span>
                     </div>
                     <div class="text-danger" v-if="errors.password">{{ errors.password }}</div>
                 </div>

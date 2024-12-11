@@ -1,18 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import Toast from '@/Components/Miscs/Toast.vue';
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { useGeneral } from '../../Compasable/General';
 const { asset } = useGeneral();
 import { useStore } from 'vuex';
-import axios from 'axios';
+const store = useStore();
 // Using ref to hold form data
 const form = ref({
-    user_name: "",
+    email: "",
     password: "",
     remember: false
 });
+
+// Setup router
+const router = useRouter();
 
 // Errors state
 const errors = ref({});
@@ -21,14 +23,18 @@ const route = useRoute();
 
 const submit = async () => {
     try {
-        
-        store.dispatch('login', {
-            email: email.value,
-            password: password.value
-        });
-
+        // Dispatch the login action to the Vuex store
+        await store.dispatch('login', form.value);
+        // Redirect after successful login
+         router.push({ name: 'home' });
     } catch (e) {
-        errors.value = e.response.data.errors;
+        if (e.response && e.response.data && e.response.data.errors) {
+            // Capture validation or other errors from the server
+            errors.value = e.response.data.errors;
+        } else {
+            // Handle other types of errors (network issues, etc.)
+            console.error('An error occurred:', e);
+        }
     }
 };
 
@@ -51,7 +57,7 @@ defineExpose({
     <Head title="Login" />
     <div class="d-flex col-12 col-lg-6 align-items-center p-sm-5 p-4 loginForm m-auto">
         <div class="w-px-500 mx-auto">
-            
+
             <h4 class="mb-1" style="margin-top: 130px;">
                 <b>
                     <span style="color:#EC1F27">Hey,</span><br>
@@ -61,9 +67,9 @@ defineExpose({
             <p class="mb-4">Welcome back. You’ve been missed!</p>
             <form id="formAuthentication" class="mb-3" @submit.prevent="submit">
                 <div class="mb-3">
-                    <label class="form-label" for="user_name">User Name <span class="text-danger">*</span></label>
-                    <input class="form-control" type="text" placeholder="john@example.com" autofocus="" tabindex="1" v-model="form.user_name" maxlength="100">
-                    <div class="text-danger" v-if="errors.user_name">{{ errors.user_name }}</div>
+                    <label class="form-label" for="email">Email<span class="text-danger">*</span></label>
+                    <input class="form-control" type="text" placeholder="john@example.com" autofocus="" tabindex="1" v-model="form.email" maxlength="100">
+                    <div class="text-danger" v-if="errors.email">{{ errors.email }}</div>
                 </div>
                 <div class="mb-3 form-password-toggle">
                     <div class="d-flex justify-content-between">
@@ -78,7 +84,7 @@ defineExpose({
                 <button class="btn btn-primary w-100" tabindex="3">Log In</button>
             </form>
 
-            <p style="margin-top:100px;width: 100%;text-align: center;"><span class="text-dark">Don’t have an account? </span> 
+            <p style="margin-top:100px;width: 100%;text-align: center;"><span class="text-dark">Don’t have an account? </span>
                 <router-link :to="{ name: 'register' }">Register Now</router-link>
             </p>
 

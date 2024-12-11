@@ -16,6 +16,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -33,9 +34,7 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return $this->success([
-                'token' => $user->createToken('API Token')->plainTextToken
-            ], 'User registered successfully.', 201);
+            return $this->success([], 'User registered successfully.', 201);
         } catch (\Exception $e) {
             return $this->error('User registration failed: ' . $e->getMessage(), 400);
         }
@@ -60,7 +59,8 @@ class AuthController extends Controller
             }
 
             return $this->success([
-                'token' => $user->createToken('API Token')->plainTextToken
+                'token' => $user->createToken('API Token')->plainTextToken,
+                'user' => $user
             ], 'Login successful.');
         } catch (\Exception $e) {
             return $this->error('Login failed: ' . $e->getMessage(), 400);

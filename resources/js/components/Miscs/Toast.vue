@@ -6,7 +6,7 @@ onMounted(() => {
     const page = usePage();
     const flash = ref(page.props.flash);
     const delay = 2000;
-    
+
     const notify = (status, message) => {
         switch (status) {
             case "success":
