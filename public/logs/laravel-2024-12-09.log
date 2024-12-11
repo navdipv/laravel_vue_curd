@@ -1,0 +1,16 @@
+[2024-12-09 18:28:40] local.ERROR: Uncaught InvalidArgumentException: Attribute [first] does not exist. in G:\Demos\tap2tipbatmandev\vendor\laravel\framework\src\Illuminate\Routing\RouteRegistrar.php:112
+Stack trace:
+#0 G:\Demos\tap2tipbatmandev\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1502): Illuminate\Routing\RouteRegistrar->attribute('first', true)
+#1 G:\Demos\tap2tipbatmandev\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php(355): Illuminate\Routing\Router->__call('first', Array)
+#2 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic('first', Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught InvalidArgumentException: Attribute [first] does not exist. in G:\\Demos\\tap2tipbatmandev\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\RouteRegistrar.php:112
+Stack trace:
+#0 G:\\Demos\\tap2tipbatmandev\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(1502): Illuminate\\Routing\\RouteRegistrar->attribute('first', true)
+#1 G:\\Demos\\tap2tipbatmandev\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(355): Illuminate\\Routing\\Router->__call('first', Array)
+#2 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic('first', Array)
+#3 {main}
+  thrown at G:\\Demos\\tap2tipbatmandev\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\RouteRegistrar.php:112)
+[stacktrace]
+#0 {main}
+"} 
