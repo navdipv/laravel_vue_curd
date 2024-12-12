@@ -62,7 +62,11 @@ class ProductController extends Controller
         }
 
         try {
-            $product = new Product();
+            if(!empty($request->id)){
+                $product = Product::find($request->id);
+            }else{
+                $product = new Product();
+            }
             $product->ulid = Str::ulid();
             $product->name = $request->name;
             $product->description = $request->description;
@@ -83,6 +87,9 @@ class ProductController extends Controller
             $product->save();
 
             if(!empty($request->categories)){
+                
+                ProductCategory::where('product_id', $product->id)->delete();
+                
                 foreach (explode(',', $request->categories) as $key => $value) {
                     $ProductCategory = new ProductCategory();
                     $ProductCategory->product_id = $product->id;
@@ -90,8 +97,11 @@ class ProductController extends Controller
                     $ProductCategory->save();
                 }
             }
-
-            return $this->success([], 'Product created successfully.', 201);
+            if(!empty($request->id)){
+                return $this->success([], 'Product updated successfully.', 201);
+            }else{
+             return $this->success([], 'Product created successfully.', 201);                
+            }
         } catch (\Exception $e) {
             return $this->error('Failed to create product: ' . $e->getMessage(), 400);
         }
@@ -106,36 +116,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return $this->error('Failed to retrieve product: ' . $e->getMessage(), 400);
         }
-    }
-
-    public function update(Request $request, $ulid)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'image' => 'nullable|string',
-            'status' => 'nullable|in:0,1',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->validationError($validator);
-        }
-
-        try {
-            $product = Product::where('ulid', $ulid)->firstOrFail();
-            $product->name = $request->name;
-            $product->description = $request->description;
-            $product->price = $request->price;
-            $product->image = $request->image;
-            $product->status = $request->status ?? 1;
-            $product->save();
-
-            return $this->success([], 'Product updated successfully.', 200);
-        } catch (\Exception $e) {
-            return $this->error('Failed to update product: ' . $e->getMessage(), 400);
-        }
-    }
+    }   
 
     public function destroy($ulid)
     {

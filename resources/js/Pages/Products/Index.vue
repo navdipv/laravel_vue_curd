@@ -163,8 +163,8 @@ onMounted(fetchProducts);
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Price</th>
-                                <th>Status</th>
                                 <th>Categories</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                             <th scope="col">Actions</th>
                         </tr>

@@ -56,6 +56,7 @@ const route = useRoute();
 // Modify the submit method to include FormData
 const submit = async () => {
   const formData = new FormData();
+  formData.append('id', form.value.id);
   formData.append('name', form.value.name);
   formData.append('price', form.value.price);
   formData.append('categories', form.value.categories);
@@ -71,7 +72,7 @@ const submit = async () => {
         'Content-Type': 'multipart/form-data'
       }
     });
-    console.log("Product creation successful:", response.data);
+    console.log("Product updated successful:", response.data);
     router.push({ name: "products-index" });
   } catch (e) {
     if (e.response && e.response.data && e.response.data.errors) {
@@ -101,7 +102,7 @@ const getProduct = async () => {
         form.value.price = product.value.price;
         form.value.categories = product.value.categories;
         form.value.status = product.value.status;
-        form.value.old_image = product.value.image;
+        form.value.old_image = product.value.image_url;
     } catch (e) {
         console.log(e);
     }
@@ -216,9 +217,8 @@ getProduct();
                         class="form-control"
                         @change="onFileChange"
                     />
-                    {{ form.old_image }}
                     <div v-if="imagePreviewUrl || form.old_image" class="image-preview">
-                        <img :src="imagePreviewUrl ?? form.old_image" alt="Preview" class="img-thumbnail mt-2"  accept="image/png, image/jpeg, image/gif" style="max-height:100px;border-radius:10px">
+                        <img :src="(imagePreviewUrl || form.old_image)" alt="Preview" class="img-thumbnail mt-2"  accept="image/png, image/jpeg, image/gif" style="max-height:100px;border-radius:10px">
                     </div>
                     <div class="text-danger" v-if="errors.image">
                       {{ errors.image }}
