@@ -1,0 +1,9 @@
+{
+    "labels": ["January", "February", "March", "April", "May"],
+    "datasets": [{
+      "label": "Sales",
+      "backgroundColor": "#f87979",
+      "data": [10, 20, 30, 40, 50]
+    }]
+  }
+  

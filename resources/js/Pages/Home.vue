@@ -4,7 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { computed } from "vue";
 const store = useStore();
 const user = computed(() => store.state.user);
-const isLoading = computed(() => store.state.isLoading);
+import BarChart from '../components/Miscs/BarChart.vue';
 </script>
 
 
@@ -13,6 +13,12 @@ const isLoading = computed(() => store.state.isLoading);
         <div>
             <h1>Welcome, {{ user.name }}</h1>
             <p>Email: {{ user.email }}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <BarChart />
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>
