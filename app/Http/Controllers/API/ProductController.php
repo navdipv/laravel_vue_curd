@@ -101,7 +101,7 @@ class ProductController extends Controller
     {
         try {
             $product = Product::where('ulid', $ulid)->firstOrFail();
-
+            $product->categories = ProductCategory::where('product_id', $product->id)->pluck("category_id")->toArray();
             return $this->success($product, '', 200);
         } catch (\Exception $e) {
             return $this->error('Failed to retrieve product: ' . $e->getMessage(), 400);

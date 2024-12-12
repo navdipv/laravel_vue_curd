@@ -176,8 +176,8 @@ onMounted(fetchProducts);
                         >
                             <td>
                                     <div v-if="row.image_url" class="image-preview">
-                                    <img :src="row.image_url" alt="Preview" class="img-thumbnail mt-2"  accept="image/png, image/jpeg, image/gif" style="max-height:50px;border-radius:10px">
-                                </div>
+                                        <img :src="row.image_url" alt="Preview" class="img-thumbnail mt-2"  accept="image/png, image/jpeg, image/gif" style="max-height:50px;border-radius:10px">
+                                    </div>
                             </td>
                             <td>{{ row.name }}</td>
                             <td>$ {{ row.price }}</td>
@@ -208,7 +208,7 @@ onMounted(fetchProducts);
                             </td>
                         </tr>
                         <tr v-if="products.data.total === 0">
-                            <td colspan="5" class="text-center">
+                            <td colspan="7" class="text-center">
                                 No products available
                             </td>
                         </tr>

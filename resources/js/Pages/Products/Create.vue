@@ -181,10 +181,9 @@ getCategories();
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="Status">Status</label>
-                    <select class="form-control" v-model="form.status">
-                      <option value="1">Active</option>
-                      <option value="0">Inactive</option>
-                    </select>
+                    <Multiselect v-model="form.status" :searchable="true"
+                        :options="[{ label: 'Active', value: 1 }, { label: 'Inactive', value: 0 }]" mode="single" :close-on-select="true"
+                        placeholder="Select a Status" />
                   </div>
                 </div>
                 <div class="col-md-6">
