@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Here's the updated installation guide for your Laravel and Vue.js project with the addition of cloning the project from the specified GitHub repository:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1. **Prerequisites Installation**:
+    - Ensure that PHP 8.2 and Composer are installed on your machine.
+    - Make sure Node.js (v20.18.1) is installed.
 
-## About Laravel
+2. **Clone the Repository**:
+    - Clone your project from GitHub:
+      ```bash
+      git clone https://github.com/navdipv/laravel_vue_curd.git
+      ```
+    - Navigate to the cloned project directory:
+      ```bash
+      cd laravel_vue_curd
+      ```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+3. **Install PHP and JavaScript Dependencies**:
+    - Install Composer and NPM dependencies:
+      ```bash
+      composer install
+      npm install
+      ```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+4. **Environment Configuration**:
+    - Copy the `.env.example` file to create a new `.env` file:
+      ```bash
+      copy .env.example .env
+      ```
+    - Adjust the `.env` file as needed, including database configurations and other environment-specific settings.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+5. **Generate Application Key**:
+    - Generate a new application key:
+      ```bash
+      php artisan key:generate
+      ```
 
-## Learning Laravel
+6. **Optimize Configuration**:
+    - Run the optimize command to cache the bootstrap files:
+      ```bash
+      php artisan optimize
+      ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+7. **Create a Virtual Host**:
+    - Configure a virtual host in your web server with the URL `http://laravel_vue_app.localhost`.
+    - Ensure your server is configured to point to the `public` directory of your Laravel project.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+8. **Run Database Migrations**:
+    - Perform the database migrations to set up your database schema:
+      ```bash
+      php artisan migrate
+      ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+9. **Compile Assets**:
+    - Compile your Vue.js components and other assets:
+      ```bash
+      npm run dev
+      ```
 
-## Laravel Sponsors
+10. **Testing the Application**:
+    - Open your browser and visit `http://laravel_vue_app.localhost` to see if the application loads properly.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+11. **Troubleshooting**:
+    - If you encounter errors during the installation, check the Laravel and NPM logs for details. Ensure that all dependencies match the versions specified in your `package.json` and `composer.json`.
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This guide includes all the steps necessary to set up and run your Laravel and Vue.js project from the GitHub repository. If you have any further questions or need additional assistance, feel free to ask!
