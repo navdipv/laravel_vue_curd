@@ -91,7 +91,8 @@ defineExpose({
                         <input class="form-control form-control-merge" type="password" placeholder="············"
                             id="password" tabindex="2" v-model="form.password">
                         <span class="input-group-text cursor-pointer" @click="reveal('password')">
-                            <font-awesome-icon :icon="['fad', 'eye']" /></span>
+                            <i class="menu-icon tf-icons ti ti-eye"></i>
+                        </span>
                     </div>
                     <div class="text-danger" v-if="errors.password">{{ errors.password }}</div>
                 </div>
@@ -104,7 +105,6 @@ defineExpose({
             </p>
         </div>
     </div>
-    <Toast v-if="route.query.status" />
 </template>
 
 <style scoped>

@@ -66,4 +66,33 @@ class AuthController extends Controller
             return $this->error('Login failed: ' . $e->getMessage(), 400);
         }
     }
+
+    public function getProfile(Request $request){
+
+        try {
+
+            $user = $request->user();
+
+            return $this->success([
+                'user' => $user
+            ], '');
+        } catch (\Exception $e) {
+            return $this->error('Login failed: ' . $e->getMessage(), 401);
+        }
+    }
+
+    public function logout(Request $request){
+
+        try {
+
+            $user = $request->user();
+            $user->tokens()->delete();
+
+            return $this->success([
+
+            ], 'User logged out successfully.');
+        } catch (\Exception $e) {
+            return $this->error('Login failed: ' . $e->getMessage(), 401);
+        }
+    }
 }

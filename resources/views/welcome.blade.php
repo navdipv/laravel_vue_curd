@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/Favicon.png') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo_1.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,15 +52,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
-    
+
     <script type="text/javascript">
         window._asset = '{{ asset("") }}';
         window._BASE_URL = '{{ url("/") }}';
     </script>
 
     <!-- Scripts -->
-    @routes    
-    @vite('resources/js/app.js')    
+    @routes
+    @vite('resources/js/app.js')
 </head>
 
 <body>

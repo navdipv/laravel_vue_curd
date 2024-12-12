@@ -54,10 +54,9 @@ defineExpose({
 </script>
 
 <template>
-    <Head title="Login" />
+
     <div class="d-flex col-12 col-lg-6 align-items-center p-sm-5 p-4 loginForm m-auto">
         <div class="w-px-500 mx-auto">
-
             <h4 class="mb-1" style="margin-top: 130px;">
                 <b>
                     <span style="color:#EC1F27">Hey,</span><br>
@@ -77,7 +76,9 @@ defineExpose({
                     </div>
                     <div class="input-group input-group-merge">
                         <input class="form-control form-control-merge" type="password" placeholder="············" id="password" tabindex="2" v-model="form.password">
-                        <span class="input-group-text cursor-pointer" @click="reveal('password')"><font-awesome-icon :icon="['fad', 'eye']" /></span>
+                        <span class="input-group-text cursor-pointer" @click="reveal('password')">
+                            <i class="menu-icon tf-icons ti ti-eye"></i>
+                        </span>
                     </div>
                     <div class="text-danger" v-if="errors.password">{{ errors.password }}</div>
                 </div>

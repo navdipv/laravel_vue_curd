@@ -1,52 +1,60 @@
-import axios from 'axios';
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import axios from "axios";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
+import store from "@/store";
 
 // Create an Axios instance
 const http = axios.create({
-    baseURL: 'http://laravel_vue_app.localhost/api/', // Adjust this to your API base URL
+    baseURL: import.meta.env.VITE_API_BASE_URL, // Adjust this to your API base URL
     headers: {
-        'Content-Type': 'application/json'
-    }
+        "Content-Type": "application/json",
+    },
 });
 
 // Add a request interceptor
 http.interceptors.request.use(
-    function(config) {
-        // Do something before request is sent
+    function (config) {
+        store.dispatch('showLoader');
         // Example: Inserting JWT token into the header of every request
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     },
-    function(error) {
-        // Do something with request error
+    function (error) {
+        setTimeout(() => {
+            store.dispatch('hideLoader');
+        }, 500);
         return Promise.reject(error);
     }
 );
 
 // Add a response interceptor
 http.interceptors.response.use(
-    function(response) {
-        if(response.data.message){
+    function (response) {
+        if (response.data.message) {
             toast.success(response.data.message, {
-                autoClose: 2000,
+                autoClose: 4000,
             });
         }
 
-        // Any status code that lie within the range of 2xx cause this function to trigger
+        setTimeout(() => {
+            store.dispatch('hideLoader');
+        }, 500);
         return response;
     },
-    function(error) {
+    function (error) {
         // Example: Handling 401 errors globally
-        if (error.response && error.response.status === 401) {
+        if (error.response && (error.response.status === 401 || error.response.status === 400 || error.response.status === 500 || error.response.status === 403)) {
             toast.error(error.response.data.error, {
-                autoClose: 2000,
+                autoClose: 4000,
             });
         }
+        setTimeout(() => {
+            store.dispatch('hideLoader');
+        }, 500);
         return Promise.reject(error);
     }
 );

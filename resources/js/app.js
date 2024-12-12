@@ -4,7 +4,6 @@ import router from './router';
 import store from './store/index';
 
 const app = createApp(App);
-import { useLoading } from 'vue-loading-overlay'
 
 // Route in Vue
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
@@ -23,17 +22,6 @@ import 'vue-loading-overlay/dist/css/index.css';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-const $loading = useLoading({
-    loader: 'bars',
-    transition:"fade",
-    opacity:"0.7",
-    "lock-scroll" : true,
-    color: "#EC1F27"
-});
-
-let loader = null;
-
-
 app.use(router)
 .use(ZiggyVue, Ziggy)
 .use(VueSweetalert2)
@@ -43,3 +31,8 @@ app.use(router)
 
 
 app.mount('#app');
+
+// Check if a token exists before dispatching getProfile
+if (localStorage.getItem('token')) {
+    store.dispatch('getProfile');
+  }
